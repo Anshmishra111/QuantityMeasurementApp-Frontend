@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantity Measurement - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body class="dashboard-page">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">Quanment</div>
+        <div class="nav-links">
+            <a href="#" id="historyBtn">History</a>
+            <a href="#" id="logoutBtn" style="margin-left: 20px; color: var(--primary-red);">Logout</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="header-banner">
+        Welcome To Quantity Measurement
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <h2 class="section-title">CHOOSE TYPE</h2>
+        
+        <div class="type-grid">
+            <!-- Length Card -->
+            <div class="type-card active-length" id="type-length" data-type="length">
+                <div class="icon-placeholder">
+                    <ion-icon name="ruler-outline"></ion-icon>
+                </div>
+                <div class="type-name">Length</div>
+            </div>
+
+            <!-- Temperature Card -->
+            <div class="type-card" id="type-temperature" data-type="temperature">
+                <div class="icon-placeholder">
+                    <ion-icon name="thermometer-outline"></ion-icon>
+                </div>
+                <div class="type-name">Temperature</div>
+            </div>
+
+            <!-- Volume Card -->
+            <div class="type-card" id="type-volume" data-type="volume">
+                <div class="icon-placeholder">
+                    <ion-icon name="water-outline"></ion-icon>
+                </div>
+                <div class="type-name">Volume</div>
+            </div>
+        </div>
+
+        <div class="calc-grid">
+            <!-- FROM Box -->
+            <div class="calc-box">
+                <div class="calc-label">FROM</div>
+                <div class="calc-input-wrapper">
+                    <input type="number" id="fromValue" value="1">
+                    <select id="fromUnit">
+                        <!-- Populated dynamically via JS -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- TO Box -->
+            <div class="calc-box">
+                <div class="calc-label">TO</div>
+                <div class="calc-input-wrapper">
+                    <input type="number" id="toValue" value="100" readonly style="background-color: #f9f9f9;">
+                    <select id="toUnit">
+                        <!-- Populated dynamically via JS -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantity Measurement - Auth</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Ionicons for the eye icon -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body class="auth-page">
+
+    <div class="auth-container">
+        <!-- TABS -->
+        <div class="auth-tabs">
+            <button class="tab-btn" id="loginTab">LOGIN</button>
+            <button class="tab-btn active" id="signupTab">SIGNUP</button>
+        </div>
+
+        <!-- SIGNUP FORM -->
+        <form id="signupForm" class="auth-form">
+            <div class="input-group">
+                <label for="regFullName">Full Name</label>
+                <input type="text" id="regFullName" required>
+            </div>
+            <div class="input-group">
+                <label for="regEmail">Email Id</label>
+                <input type="email" id="regEmail" required>
+            </div>
+            <div class="input-group">
+                <label for="regPassword">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="regPassword" required>
+                    <ion-icon name="eye-off-outline" class="toggle-password" id="regTogglePwd"></ion-icon>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="regMobile">Mobile Number</label>
+                <input type="tel" id="regMobile" required>
+            </div>
+
+            <button type="submit" class="submit-btn bg-red">Signup</button>
+        </form>
+
+        <!-- LOGIN FORM (Hidden by default) -->
+        <form id="loginForm" class="auth-form hidden">
+            <div class="input-group">
+                <label for="loginEmail">Email Id</label>
+                <input type="email" id="loginEmail" required>
+            </div>
+            <div class="input-group">
+                <label for="loginPassword">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="loginPassword" required>
+                    <ion-icon name="eye-off-outline" class="toggle-password" id="loginTogglePwd"></ion-icon>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn bg-red">Login</button>
+        </form>
+    </div>
+
+    <!-- JS Logic -->
+    <script src="js/auth.js"></script>
+</body>
+</html>
