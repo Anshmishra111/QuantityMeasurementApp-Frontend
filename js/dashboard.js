@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8082';
+const BASE_URL = 'http://localhost:8081';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Auth Check

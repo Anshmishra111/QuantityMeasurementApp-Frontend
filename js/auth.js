@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8082';
+const BASE_URL = 'http://localhost:8081';
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginTab = document.getElementById('loginTab');
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Error in login:', error);
-            alert('Could not connect to Spring Boot Server on port 8082.');
+            alert('Could not connect to Spring Boot Server on port 8081.');
         }
     });
 });
