@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const signupTab = document.getElementById('signupTab');
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
-    
+
     // Tab Switching Logic
     loginTab.addEventListener('click', () => {
         loginTab.classList.add('active');
@@ -42,55 +42,54 @@ document.addEventListener('DOMContentLoaded', () => {
     // Registration Form Handler
     signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const email = document.getElementById('regEmail').value;
         const password = document.getElementById('regPassword').value;
 
         try {
-            const res = await fetch(`${BASE_URL}/auth/signup`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                // Backend AuthRequest expects username and password
-                body: JSON.stringify({ username: email, password: password })
-            });
-
-            if (res.ok) {
-                alert('Account created successfully! Please login.');
+            let users = JSON.parse(localStorage.getItem('mockUsers') || '[]');
+            const existingUser = users.find(u => u.email === email);
+            
+            if (existingUser) {
+                alert('Account already exists. Please login.');
                 loginTab.click();
-            } else {
-                alert('Could not create account to the Backend.');
+                return;
             }
+
+            const newUser = { id: Date.now(), email, password };
+            users.push(newUser);
+            localStorage.setItem('mockUsers', JSON.stringify(users));
+
+            alert('Account created successfully! Please login.');
+            loginTab.click();
         } catch (error) {
             console.error('Error in signup:', error);
-            alert('Could not connect to Spring Boot Server on port 8082.');
+            alert('Something went wrong during signup.');
         }
     });
 
     // Login Form Handler
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const email = document.getElementById('loginEmail').value;
         const password = document.getElementById('loginPassword').value;
 
         try {
-            const res = await fetch(`${BASE_URL}/auth/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: email, password: password })
-            });
-            
-            if (res.ok) {
-                const token = await res.text(); // Backend returns JWT string
+            let users = JSON.parse(localStorage.getItem('mockUsers') || '[]');
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
                 // Success
-                localStorage.setItem('currentUser', JSON.stringify({ email: email, token: token }));
+                const mockToken = btoa(email + new Date().getTime());
+                localStorage.setItem('currentUser', JSON.stringify({ email: user.email, token: mockToken, id: user.id }));
                 window.location.href = 'dashboard.html';
             } else {
                 alert('Invalid email or password.');
             }
         } catch (error) {
             console.error('Error in login:', error);
-            alert('Could not connect to Spring Boot Server on port 8081.');
+            alert('Something went wrong during login.');
         }
     });
 });

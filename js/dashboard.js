@@ -103,12 +103,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (from === to) return valNum;
 
         if (type === 'temperature') {
-            if (from === 'Celsius' && to === 'Fahrenheit') return (valNum * 9/5) + 32;
-            if (from === 'Fahrenheit' && to === 'Celsius') return (valNum - 32) * 5/9;
+            if (from === 'Celsius' && to === 'Fahrenheit') return (valNum * 9 / 5) + 32;
+            if (from === 'Fahrenheit' && to === 'Celsius') return (valNum - 32) * 5 / 9;
             if (from === 'Celsius' && to === 'Kelvin') return valNum + 273.15;
             if (from === 'Kelvin' && to === 'Celsius') return valNum - 273.15;
-            if (from === 'Fahrenheit' && to === 'Kelvin') return ((valNum - 32) * 5/9) + 273.15;
-            if (from === 'Kelvin' && to === 'Fahrenheit') return ((valNum - 273.15) * 9/5) + 32;
+            if (from === 'Fahrenheit' && to === 'Kelvin') return ((valNum - 32) * 5 / 9) + 273.15;
+            if (from === 'Kelvin' && to === 'Fahrenheit') return ((valNum - 273.15) * 9 / 5) + 32;
         } else {
             // Volume or Length
             const mapping = unitConfigs[type].conversions;
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const baseValue = valNum * mapping[from];
             // Convert base to 'to'
             const finalValue = baseValue / mapping[to];
-            
+
             // Round to 4 decimal places
             return Math.round(finalValue * 10000) / 10000;
         }
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const recalculate = () => {
         const result = calculateValue(fromValueEl.value, fromUnitEl.value, toUnitEl.value, activeType);
         toValueEl.value = result;
-        
+
         // Debounce network request to avoid spamming json-server
         clearTimeout(window.calcTimeout);
         window.calcTimeout = setTimeout(() => {
@@ -137,26 +137,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const saveHistory = async (fVal, fUnit, tVal, tUnit, mType) => {
         if (!fVal || !tVal) return;
-        
+
         try {
-            await fetch(`${BASE_URL}/history`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    userId: currentUser.id,
-                    measurementType: mType,
-                    fromValue: fVal,
-                    fromUnit: fUnit,
-                    toValue: tVal,
-                    toUnit: tUnit,
-                    timestamp: new Date().toISOString()
-                })
+            let history = JSON.parse(localStorage.getItem('mockHistory') || '[]');
+            history.push({
+                userId: currentUser.id || 1,
+                measurementType: mType,
+                fromValue: fVal,
+                fromUnit: fUnit,
+                toValue: tVal,
+                toUnit: tUnit,
+                timestamp: new Date().toISOString()
             });
+            localStorage.setItem('mockHistory', JSON.stringify(history));
+            console.log('History locally saved.');
         } catch (e) {
-            console.error('Failed to log history');
+            console.error('Failed to log history', e);
         }
     };
-
 
     // Attach Card Listeners
     Object.keys(cards).forEach(key => {
