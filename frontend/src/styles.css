@@ -1,0 +1,56 @@
+/* ── Google Font ─────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Design Tokens ───────────────────────────── */
+:root {
+  --bg-primary:    #0d0f17;
+  --bg-secondary:  #161927;
+  --bg-card:       #1a1e2e;
+  --border-color:  rgba(255, 255, 255, 0.07);
+
+  --text-primary:  #f0f2ff;
+  --text-secondary:#b0b8d8;
+  --text-muted:    #606888;
+
+  --accent-purple: #6C63FF;
+  --accent-teal:   #4ECDC4;
+  --accent-pink:   #FF6B9D;
+
+  --gradient-brand: linear-gradient(135deg, #6C63FF 0%, #4ECDC4 100%);
+}
+
+/* ── Reset & Base ────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ───────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+
+/* ── Typography helpers ──────────────────────── */
+h1, h2, h3, h4, h5 { line-height: 1.2; }
+
+/* ── Form controls (global reset) ───────────── */
+input, select, button, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+select option { background: var(--bg-secondary); color: var(--text-primary); }
+
+/* ── Utility ─────────────────────────────────── */
+.user-info { display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 0; }
