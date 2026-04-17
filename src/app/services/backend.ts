@@ -56,7 +56,7 @@ export interface MeasurementDTO {
 export class BackendService {
 
   // Production: All requests go through the deployed API Gateway on Render
-  private readonly BASE_URL = 'https://quantity-measurement-app.onrender.com';
+  private readonly BASE_URL = 'https://quantity-measurement-app-p09q.onrender.com';
 
   constructor(private http: HttpClient) {}
 
