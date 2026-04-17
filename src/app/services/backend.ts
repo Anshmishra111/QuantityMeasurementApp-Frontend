@@ -55,8 +55,8 @@ export interface MeasurementDTO {
 })
 export class BackendService {
 
-  // UC18: All requests go through the API Gateway on port 8080
-  private readonly BASE_URL = 'http://localhost:8080';
+  // Production: All requests go through the deployed API Gateway on Render
+  private readonly BASE_URL = 'https://quantity-measurement-app.onrender.com';
 
   constructor(private http: HttpClient) {}
 
